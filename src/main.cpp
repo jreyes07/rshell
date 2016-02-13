@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include<stdio.h>
+#include<sys/types.h>
 
 /*
 	// CORE
@@ -23,7 +25,7 @@ class Command{
 		std::string connect;
 		bool ran;
 		bool valid;
-		void execvp();
+		void execute();
 		void fork();
 		void waitpid();
 		void clear(){
@@ -34,6 +36,11 @@ class Command{
 			valid = false;
 		}
 };
+void Command::execute()
+{
+	int numargs = arg.size();
+	char Cmd[] = cmd;
+}
 // Holds the data values for a command
 // Containts the functions to execute said commands
 
@@ -165,6 +172,7 @@ void testMain1(std::vector<Command> cmdList){
 	std::cout << "==============================" << std::endl;
 	}
 }
+
 int main(){
 	std::string rawCmd;			// Raw input from user
 	std::vector<Command> cmdList;			// Vector to store commands after they've been parsed
@@ -173,7 +181,13 @@ int main(){
 	std::getline(std::cin, rawCmd); // Receive command line
 
 	parse(rawCmd, cmdList);		// Parse the command line
-
+	for(std::vetor<Command>::iterator it = cmdList.begin() ; it != cmdList.end(); ++it)//iterate through each command in cmdList vector and execute using execvp
+		{
+			int x = 0;
+			cmdList[x].execute();
+			
+			x++;
+		}
 	testMain1(cmdList);
 	return 0;
 }
